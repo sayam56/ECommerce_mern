@@ -59,6 +59,11 @@ userSchema.virtual('pass')
      this.hash_pass = bcrypt.hashSync(pass, 10);
 });
 
+userSchema.virtual('fullName')
+.get(function (){
+     return `${this.firstName} ${this.lastName}`;
+});
+
 userSchema.methods = {
      authenticate: function(pass){
           return bcrypt.compareSync(pass, this.hash_pass);

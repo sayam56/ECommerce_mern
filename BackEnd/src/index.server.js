@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const app = express();
 
 // here we import the router
-const userRoutes = require('./routes/user');
+const authRoutes = require('./routes/auth');
+const adminRoutes = require('./routes/admin/auth');
 
 
 // environment variables configurator
@@ -35,7 +36,9 @@ app.use(express.urlencoded({
 
 
 // now we use the router which is not prefixed by /api
-app.use('/api', userRoutes);
+app.use('/api', authRoutes);
+
+app.use('/api', adminRoutes);
 
 
 app.listen(process.env.PORT, () => {
