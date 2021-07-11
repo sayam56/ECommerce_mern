@@ -3,6 +3,7 @@ const User =  require('../models/user');
 const jwt = require('jsonwebtoken');
 
 exports.signUp = (req, res) =>{  
+
 // we check if there is any existing user
 // so if the email has a match
 User.findOne({ email: req.body.email }) 

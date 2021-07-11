@@ -1,17 +1,17 @@
 const express = require('express')
 const { signUp, signIn, requireSignIn } = require('../controllers/auth')
-const {} = require('express-validator')
+const { validateSignUpRequest, isRequestValidated, validateSignInRequest } = require('../validator/auth');
 
 // here we create the router
 const router = express.Router();
 
 
 // these are the router functions
-router.post("/signIn", signIn);
+router.post("/signIn",validateSignInRequest, isRequestValidated, signIn);
 
 
 // if api gets a signup hit send it to the signUp function in controller
-router.post("/signUp", signUp);
+router.post("/signUp", validateSignUpRequest,isRequestValidated, signUp);
 
 router.post("/profile", requireSignIn, (req,res)=>{
    return res.status(200).json({
