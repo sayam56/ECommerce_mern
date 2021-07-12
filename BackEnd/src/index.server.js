@@ -6,6 +6,7 @@ const app = express();
 // here we import the router
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin/auth');
+const categoryRoutes = require('./routes/category');
 
 
 // environment variables configurator
@@ -34,10 +35,10 @@ app.use(express.urlencoded({
 }));
 
 
-// now we use the router which is not prefixed by /api
+// now we use the router which is now prefixed by /api
 app.use('/api', authRoutes);
-
 app.use('/api', adminRoutes);
+app.use('/api', categoryRoutes);
 
 
 app.listen(process.env.PORT, () => {
