@@ -1,5 +1,5 @@
 const slugify = require ('slugify');
-const Category = require('../models/category')
+const Category = require('../models/category');
 
 function createCategories(categories, parentID = null){
  
