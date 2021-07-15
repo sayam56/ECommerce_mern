@@ -64,7 +64,7 @@ exports.signIn = (req, res) =>{
 
                     // with the generated token we have now attached a payload _id
                     // this payload will reveal itself only upon successful verifying of the token
-                    const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET, {expiresIn: '2h'});
+                    const token = jwt.sign({_id: user._id, role: user.role}, process.env.JWT_SECRET, {expiresIn: '2h'});
                     const {
                          _id,
                          firstName,
