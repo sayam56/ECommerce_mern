@@ -14,6 +14,7 @@ exports.addItemToCart = (req, res) =>{
 
                if(existentItem){
                     Cart.findOneAndUpdate({"user": req.user._id, "cartItems.product": product}, {
+                         // Comment to save
                          "$set" : {
                               "cartItems": {
                                    ...req.body.cartItems,
