@@ -27,7 +27,11 @@ exports.addCategory = (req,res) => {
 
      const categoryObject = {
           name: req.body.name,
-          slug: slugify(req.body.name)
+          slug: slugify(req.body.name),
+     }
+
+     if(req.file){
+          categoryObject.categoryImage = process.env.API+ '/public/' + req.file.filename;
      }
 
      if(req.body.parentID){
