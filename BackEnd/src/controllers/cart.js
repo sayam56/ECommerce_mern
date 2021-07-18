@@ -7,6 +7,7 @@ exports.addItemToCart = (req, res) =>{
           if(error) return res.status(400).json({ error });
           if(cart){
                //if cart already exists then update cart by quantity
+               /* saving again, work load too much */
 
                // check if that item exists
                const product = req.body.cartItems.product;
