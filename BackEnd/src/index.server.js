@@ -2,6 +2,7 @@ const express = require('express');
 const env = require('dotenv');
 const mongoose = require('mongoose');
 const app = express();
+const path = require ('path');
 
 // here we import the router
 const authRoutes = require('./routes/auth');
@@ -36,7 +37,7 @@ app.use(express.urlencoded({
      extended: true
 }));
 
-
+app.use('/public', express.static(path.join(__dirname, 'uploads')));
 // now we use the router which is now prefixed by /api
 app.use('/api', authRoutes);
 app.use('/api', adminRoutes);
