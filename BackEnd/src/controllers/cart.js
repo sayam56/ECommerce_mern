@@ -13,36 +13,35 @@ exports.addItemToCart = (req, res) =>{
                const product = req.body.cartItems.product;
                const existentItem = cart.cartItems.find(c => c.product == product);
 
+               let condition, action;
+
                if(existentItem){
-                    Cart.findOneAndUpdate({"user": req.user._id, "cartItems.product": product}, {
+                    condition = {"user": req.user._id, "cartItems.product": product};
+                    update = {
                          // Comment to save
                          "$set" : {
-                              "cartItems": {
+                              "cartItems.$": {
                                    ...req.body.cartItems,
                                    quantity: parseFloat(existentItem.quantity) + parseFloat(req.body.cartItems.quantity),
                               }
                          }
-                    })
-                    .exec((er, _cart) => {
-                         if(er) return res.status(400).json({ er });
-                         if(_cart){
-                              return res.status(200).json({ _cart })
-                         }
-                    });
+                    };
                }else{
-                    Cart.findOneAndUpdate({user: req.user._id}, {
+                    condition = {user: req.user._id};
+                    update = {
                          "$push" : {
                               "cartItems": req.body.cartItems
                          }
-                    })
-                    .exec((er, _cart) => {
-                         if(er) return res.status(400).json({ er });
-                         if(_cart){
-                              return res.status(200).json({ _cart })
-                         }
-                    });
-                    // res.status(200).json({ message: cart });
+                    };
                }
+
+               Cart.findOneAndUpdate(condition, update)
+               .exec((er, _cart) => {
+                    if(er) return res.status(400).json({ er });
+                    if(_cart){
+                         return res.status(200).json({ _cart })
+                    }
+               });
           }else{
                //if cart doesn't exist then create a new cart
                const cart = new Cart({
