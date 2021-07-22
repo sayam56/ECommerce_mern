@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import Layout from "../../components/layout";
 import Input from "../../components/UI/Input";
@@ -7,6 +7,12 @@ import { useDispatch } from "react-redux";
 
 const SignIn = (props) => {
 
+  // react hooks, helps to create states in functional components.
+  // returns an array containing the actual returned value and a function by which we can actually set the value
+  const [email, setEmail] = useState('');
+  const [pass, setPassword] = useState('');
+  const [error, setError] = useState('');
+
   const dispatch = useDispatch();
 
   const userLoggedIn = (e) => {
@@ -14,8 +20,7 @@ const SignIn = (props) => {
     e.preventDefault();
 
     const user = {
-      email: 'sayam@gmail.com',
-      password: '123456'
+      email, pass
     }
     dispatch(login(user));
   }
@@ -29,17 +34,17 @@ const SignIn = (props) => {
                 <Input
                   label="Email ID"
                   placeholder="Enter Your Email ID"
-                  value=""
+                  value={email}
                   type="email"
-                  onChange={() => {}}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
 
                 <Input
                   label="Password"
                   placeholder="Enter Your Password"
-                  value=""
-                  type="password"
-                  onChange={() => {}}
+                  value={pass}
+                  type="pass"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <Button variant="primary" type="submit">
                   Submit

@@ -3,6 +3,7 @@ const env = require('dotenv');
 const mongoose = require('mongoose');
 const app = express();
 const path = require ('path');
+const cors = require ('cors');
 
 // here we import the router
 const authRoutes = require('./routes/auth');
@@ -30,6 +31,8 @@ mongoose.connect(
      console.log(e);
 });
 
+
+app.use(cors());
 
 // this is to parse the json data from incoming payload body parser is a middle wear
 app.use(express.json());
