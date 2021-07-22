@@ -3,6 +3,7 @@ import './App.css';
 import Home from './containers/Home';
 import SignIn from './containers/SignIn';
 import SignUp from './containers/SignUp';
+import PrivateRoute from './components/HOC/PrivateRoute';
 
 
 
@@ -11,7 +12,7 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/" exact component={Home} />
+          <PrivateRoute path="/" exact component={Home} />
           <Route path="/signIn" component={SignIn} />
           <Route path="/signUp" component={SignUp} />
         </Switch>
